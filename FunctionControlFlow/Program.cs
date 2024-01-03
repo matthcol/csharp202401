@@ -1,20 +1,4 @@
-﻿UInt64 Gcd(UInt64 a, UInt64 b)
-{
-    while (a != b)
-    {
-        if (a > b)
-        {
-            a -= b;
-        }
-        else
-        {
-            b -= a;
-        }        
-    }
-    return a;
-}
-
-
+﻿
 void NewYearCounter(UInt32 cpt)
 {
     while (cpt > 0)
@@ -29,5 +13,9 @@ void NewYearCounter(UInt32 cpt)
 NewYearCounter(10);
 UInt64 a = 12;
 UInt64 b = 27;
-UInt64 g = Gcd(a, b);
+UInt64 g = Euclide.Gcd(a, b);
 Console.WriteLine($"Gcd({a}, {b}) = {g}");
+Console.WriteLine(Weather.Kind(12));
+Console.WriteLine(Weather.Kind2(19));
+Console.WriteLine(Weather.Kind3(20));
+Console.WriteLine(Weather.Kind4(35));
