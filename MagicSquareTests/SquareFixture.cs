@@ -50,14 +50,14 @@ namespace MagicSquareTests
 
         public static readonly UInt32[,] SQUARE_3_KO_DIAG1 = {
             {8, 1, 6},
-            {3, 5, 7},
+            {2, 5, 7},
             {4, 9, 3}
         };
 
         public static readonly UInt32[,] SQUARE_3_KO_DIAG2 = {
-            {8, 1, 5},
-            {3, 5, 7},
-            {4, 9, 2}
+            {8, 1, 6},
+            {4, 5, 7},
+            {3, 9, 2}
         };
 
         public static readonly UInt32[,] SQUARE_3_KO_OUT_OF_RANGE_ABOVE = {

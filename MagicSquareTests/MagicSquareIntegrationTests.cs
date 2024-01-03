@@ -39,7 +39,7 @@ namespace Magic
             Assert.True(ok);
         }
 
-        public static IEnumerable<Object[]> MagicSquareRowsKo()
+        public static IEnumerable<Object[]> MagicSquaresKo()
         {
             return new List<Object[]>()
             {
@@ -55,7 +55,7 @@ namespace Magic
         }
 
         [Theory]
-        [MemberData(nameof(MagicSquareRowsKo))]
+        [MemberData(nameof(MagicSquaresKo))]
         public void IsMagicTest_KO(UInt32[,] square)
         {
             var ok = MagicSquare.IsMagic(square);

@@ -135,5 +135,49 @@ namespace Magic
             var ok = MagicSquare.AreMagicDiagonals(square, n, magicSum);
             Assert.False(ok);
         }
+
+        // All element present
+
+        public static IEnumerable<Object[]> MagicSquareAllElementPresentOk()
+        {
+            return new List<Object[]>()
+            {
+                new object[] { SquareFixture.SQUARE_3_OK, 3},
+                new object[] { SquareFixture.SQUARE_3_KO_ROWS, 3},
+                new object[] { SquareFixture.SQUARE_3_KO_COLUMNS, 3},
+                new object[] { SquareFixture.SQUARE_3_KO_2_DIAGS, 3},
+                new object[] { SquareFixture.SQUARE_3_KO_DIAG1, 3},
+                new object[] { SquareFixture.SQUARE_3_KO_DIAG2, 3},
+                new object[] { SquareFixture.SQUARE_4_OK_ALBRECHT_DURER, 4},
+                new object[] { SquareFixture.SQUARE_5_OK, 5},
+                new object[] { SquareFixture.SQUARE_12_OK_WILLEM_BARINK, 12}
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(MagicSquareAllElementPresentOk))]
+        public void AreAllMagicPresentTest_OK(UInt32[,] square, UInt32 n)
+        {
+            var ok = MagicSquare.AreAllMagicPresent(square, n);
+            Assert.True(ok);
+        }
+
+        public static IEnumerable<Object[]> MagicSquareAllElementPresentKo()
+        {
+            return new List<Object[]>()
+            {
+                new object[] { SquareFixture.SQUARE_3_KO_OUT_OF_RANGE_UNDER, 3},
+                new object[] { SquareFixture.SQUARE_3_KO_OUT_OF_RANGE_ABOVE, 3 },
+                new object[] { SquareFixture.SQUARE_3_KO_REPEATED_VALUE, 3},
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(MagicSquareAllElementPresentKo))]
+        public void AreAllMagicPresentTest_KO(UInt32[,] square, UInt32 n)
+        {
+            var ok = MagicSquare.AreAllMagicPresent(square, n);
+            Assert.False(ok);
+        }
     }
 }
