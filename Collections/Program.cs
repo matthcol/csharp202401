@@ -1,5 +1,8 @@
-﻿
+﻿global using CityPop = (string City, uint Population);
+
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
+
 
 void DisplayList(IList<string> list)
 {
@@ -101,7 +104,165 @@ void PlayWithList2()
     Console.WriteLine(bigData[^1]);
 }
 
+void PlayWithList3()
+{
+    IList<string> cities = new List<string>() {"Pau", "Paris", "Toulouse"};
+    IList<string> cities2 = [ "Pau", "Paris", "Toulouse" ]; // C#12
+    Console.WriteLine(cities.GetType());
+    Console.WriteLine(cities2.GetType());
+}
 
-PlayWithLists();
+void PlayWithSortedSet()
+{
+    IList<string> cityList = ["Pau", "Paris", "Toulouse", "Marseille", "Lyon", "Orléans", "Clermont-Ferrand"];
+    ISet<string> citySet = new SortedSet<string>(cityList);
+    DisplayCollection(cityList);
+    DisplayCollection(citySet);
+    citySet.Add("Pau");
+    citySet.Add("Bayonne");
+    DisplayCollection(citySet);
+
+    IComparer<string> comparer = new StringLengthComparer();
+    ISet<string> citySet2 = new SortedSet<string>(citySet, comparer);
+    DisplayCollection(citySet2);
+
+    IComparer<string> comparerLengthDesc = Comparer<string>.Create(
+        (s1, s2) => s2.Length - s1.Length
+    );
+    ISet<string> citySet3 = new SortedSet<string>(citySet, comparerLengthDesc);
+    DisplayCollection(citySet3);
+
+    IComparer<string> comparerLengthDesc2 = Comparer<string>.Create(
+      (s1, s2) =>
+      {
+          var diff = s2.Length - s1.Length;
+          if (diff == 0) diff = s1.CompareTo(s2);
+          return diff;
+      }
+    );
+    ISet<string> citySet4 = new SortedSet<string>(citySet, comparerLengthDesc2);
+    DisplayCollection(citySet4);
+}
+
+void PlayWitDictionary()
+{
+    IDictionary<string, UInt32> cityPopulations = new Dictionary<string, UInt32>()
+    {
+        { "Pau", 77_000 },
+        { "Toulouse", 470_000 },
+        { "Paris", 2_161_000 }
+    };
+    cityPopulations.Add("Orléans", 114_000);
+    // cityPopulations.Add("Orléans", 114_611); // System.ArgumentException 
+    DisplayCollection(cityPopulations);
+    cityPopulations["Orléans"] = 114_611;
+    DisplayCollection(cityPopulations);
+    cityPopulations["Marseille"] = 860_000;
+    DisplayCollection(cityPopulations);
+    Console.WriteLine(cityPopulations["Marseille"]);
+    // Console.WriteLine(cityPopulations["Bordeaux"]); // KeyNotFoundException
+
+    IList<string> cities = ["Marseille", "Bordeaux"];
+    // try methods: TryGetValue, ContainsKey
+    foreach (string city in cities)
+    {
+        UInt32 pop = 0;
+        // method 1
+        if (cityPopulations.TryGetValue(city, out pop))
+        { 
+            Console.WriteLine($"Population of city {city} is {pop}");
+        } 
+        else
+        {
+            Console.WriteLine($"Population of city {city} is unknown");
+        }
+        // method 2: non optimized
+        if (cityPopulations.ContainsKey(city))
+        {
+            pop = cityPopulations[city];
+            Console.WriteLine($"Population of city {city} is {pop}");
+        }
+        else
+        {
+            Console.WriteLine($"Population of city {city} is unknown");
+        }
+    }
+    // iterate over Dictionaries
+    Console.WriteLine();
+    foreach (KeyValuePair<string, UInt32> cityPop in cityPopulations)
+    {
+        Console.WriteLine($"{cityPop} : {cityPop.Key} => {cityPop.Value}");
+    }
+
+    Console.WriteLine();
+    // iterate using deconstructor of type KeyValuePair
+    foreach ((var city, var pop) in cityPopulations)
+    {
+        Console.WriteLine($"{city} => {pop}");
+    }
+
+    Console.WriteLine();
+    foreach (string city in cityPopulations.Keys)
+    {
+        Console.WriteLine(city);
+    }
+
+    Console.WriteLine();
+    foreach (UInt32 pop in cityPopulations.Values)
+    {
+        Console.WriteLine(pop);
+    }
+}
+
+
+(string,int) GenerateCity()
+{
+    return ("Toulouse", 477_000);
+}
+
+(string City, int Population) GenerateCityN()
+{
+    // return ("Toulouse", 477_000); // still OK
+    return (City: "Toulouse", Population: 477_000);
+}
+
+void PlayWithTuples()
+{
+    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-tuples
+
+    // tuple (struct):  (string,int) or ValueTuple<string,int>
+    var cityPop = ("Pau", 77_000);
+    Console.WriteLine(cityPop);
+    Console.WriteLine(cityPop.Item1);
+    Console.WriteLine(cityPop.Item2);
+
+    // Tuple (class): Tuple<string,int>
+    var cityPop2 = cityPop.ToTuple();
+    Console.WriteLine(cityPop2);
+    Console.WriteLine(cityPop2.Item1);
+    Console.WriteLine(cityPop2.Item2);
+
+    var cityPop3 = GenerateCity();
+    Console.WriteLine(cityPop3);
+
+    // deconstruct tuple
+    var (city, pop) = GenerateCity();
+    Console.WriteLine($"{city} has population {pop}");
+
+    var cityPop4 = GenerateCityN();
+    Console.WriteLine($"{cityPop4}: {cityPop4.City} {cityPop4.Population}");
+
+    Console.WriteLine(cityPop4 == ("Toulouse",477_000));
+    Console.WriteLine(cityPop4 == (City:"Toulouse", Population: 477_000));
+}
+
+/*PlayWithLists();
 Console.WriteLine();
 PlayWithList2();
+Console.WriteLine();
+PlayWithList3();
+*/
+
+//PlayWithSortedSet();
+//PlayWitDictionary();
+PlayWithTuples();
