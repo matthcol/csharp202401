@@ -45,7 +45,9 @@ namespace Magic
 
         public static bool AreAllMagicPresent(UInt32[,] square, UInt32 n)
         {
-            return false;
+            UInt32 maxValue = n * n;
+            return square.Cast<UInt32>().All(v => (v > 0) && (v <= maxValue))
+                && square.Cast<UInt32>().ToHashSet().Count == maxValue;
         }
 
         public static bool IsMagic(UInt32[,] square) {
