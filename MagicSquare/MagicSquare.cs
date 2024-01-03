@@ -52,11 +52,10 @@ namespace Magic
             // compute magic sum
             var n = (UInt32) square.GetLength(0);
             var ms = MagicSum(n);
-            // verify rows
-            // verify columns
-            // verify 'diagonals'
-            // verify all numbers are present (only once)
-            return false;
+            return AreMagicRows(square, n, ms)
+                && AreMagicColumns(square, n, ms)
+                && AreMagicDiagonals(square, n, ms)
+                && AreAllMagicPresent(square, n);
         }
 
         // + unit test
