@@ -38,3 +38,16 @@ foreach (var form in forms)
 {
     Console.WriteLine(form);
 }
+
+Polygon p1 = new("P1", [points[0], points[1], points[2]]);
+Console.WriteLine(p1);
+
+
+try
+{
+    Polygon p2 = new("?", [points[3]]);
+} 
+catch (ArgumentException ex)
+{
+    Console.WriteLine("Not possible ;)");
+}
