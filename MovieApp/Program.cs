@@ -75,3 +75,6 @@ var resSearch2 = movies.Where(m => m == movieSearch).ToList();
 var resSearch3 = movies.Where(m => m == movie).ToList();
 
 Console.WriteLine($"{resSearch1.Count} vs {resSearch2.Count} vs {resSearch3.Count}");
+
+bool ok = movie < movie2;
+Console.WriteLine(ok);
