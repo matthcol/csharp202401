@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using Geometry.Extension;
+﻿using Geometry.Extension;
 using Geometry.Model;
 
 Console.WriteLine("Hello, World!");
@@ -44,7 +43,8 @@ foreach (var form in forms)
 Polygon poly1 = new("P1", [points[0], points[1], points[2]]);
 Console.WriteLine(poly1);
 forms.Add(poly1);
-
+Polygon p1 = new("P1", [points[0], points[1], points[2]]);
+Console.WriteLine(p1);
 
 try
 {
