@@ -10,5 +10,8 @@ namespace Geometry.Model
     {
         double Perimeter { get; }
         double Area { get; }
+
+        // default method
+        double Surface { get => Area; }
     }
 }

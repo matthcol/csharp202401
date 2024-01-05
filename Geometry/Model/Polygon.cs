@@ -26,6 +26,12 @@ namespace Geometry.Model
             }
         }
 
+        public Point this[int i]
+        {
+            get => Summits[i];
+            set => Summits[i] = value;
+        }
+
         public double Perimeter { get {
                 double res = 0.0;
                 for (int i = 0; i < Summits.Count; i++)
