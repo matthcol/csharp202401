@@ -102,6 +102,57 @@ void PlayWithList2()
     DisplayCollection(bigData, 6);
     Console.WriteLine(bigData[0]);
     Console.WriteLine(bigData[^1]);
+
+    // Linq
+    // https://learn.microsoft.com/en-us/dotnet/csharp/linq/
+
+    var first100 = bigData.Take(100)
+        .ToList();
+    DisplayCollection(first100);
+
+    var data20 = bigData.Take(100)
+        .Select(x => 20*x)
+        .ToList();
+    DisplayCollection(data20);
+
+    // check all values of data20 are in range [0-20[
+    bool okRange = data20.All(x => (x >= 0.0) && (x < 20.0));
+    Console.WriteLine($"All values are in range [0-20[ : {okRange}");
+
+    // is there any value >= 19 ?
+    bool okAnyGreater19 = data20.Any(x => x >= 19.0);
+    Console.WriteLine($"Any values >= 19.0: {okAnyGreater19}");
+
+    // how many values >= 19 ?
+    int nbGreater19 = data20.Count(x => x >= 19.0);
+    Console.WriteLine($"Values >= 19.0: count={nbGreater19}");
+
+    int nbGreater19b = (from x in data20
+                       where x >= 19
+                       select x
+                       ).Count();
+
+    var topValues = bigData.Where(x => x >= 0.95)
+        .OrderBy(x => x)
+        .ToList();
+    DisplayCollection(topValues);
+
+    IEnumerable<char> letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+    var taggedData = bigData
+        .Zip(letters)
+        .Select( valueLetter => (valueLetter.First * 20.0, valueLetter.Second))
+        .ToList();
+    DisplayCollection(taggedData);
+
+    var range = ..100; // not Linq'able'
+    var sample = Enumerable.Range(0, 100)
+        .Select(i => bigData[i * 1000])
+        .ToList();
+    DisplayCollection(sample);
+
+    var indexedData = data20.Select((x, i) => (i, x))
+        .ToHashSet();
+    DisplayCollection(indexedData);
 }
 
 void PlayWithList3()
@@ -256,13 +307,13 @@ void PlayWithTuples()
     Console.WriteLine(cityPop4 == (City:"Toulouse", Population: 477_000));
 }
 
-/*PlayWithLists();
+//PlayWithLists();
 Console.WriteLine();
 PlayWithList2();
 Console.WriteLine();
-PlayWithList3();
-*/
+//PlayWithList3();
+
 
 //PlayWithSortedSet();
 //PlayWitDictionary();
-PlayWithTuples();
+//PlayWithTuples();

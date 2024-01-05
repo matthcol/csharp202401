@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Moviemain.Model
 {
-    public class Movie: IComparable<Movie>, IEquatable<Movie>
+    public class Movie: IComparable<Movie>, IEquatable<Movie>, IComparisonOperators<Movie,Movie,bool>
     {
         public Movie(): this(null,"?", 0, null)
         {
@@ -65,5 +66,40 @@ namespace Moviemain.Model
         // Override Object method
         //public override string ToString() => $"{Title} ({Year})#{Id??0}";         
         public override string ToString() => $"{Title} ({Year})#{(Id==null ? "?" : Id.ToString())}";
+
+        public static bool operator ==(Movie left, Movie right)
+        {
+            if (ReferenceEquals(left, null))
+            {
+                return ReferenceEquals(right, null);
+            }
+
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Movie left, Movie right)
+        {
+            return !(left == right);
+        }
+
+        public static bool operator <(Movie left, Movie right)
+        {
+            return ReferenceEquals(left, null) ? !ReferenceEquals(right, null) : left.CompareTo(right) < 0;
+        }
+
+        public static bool operator <=(Movie left, Movie right)
+        {
+            return ReferenceEquals(left, null) || left.CompareTo(right) <= 0;
+        }
+
+        public static bool operator >(Movie left, Movie right)
+        {
+            return !ReferenceEquals(left, null) && left.CompareTo(right) > 0;
+        }
+
+        public static bool operator >=(Movie left, Movie right)
+        {
+            return ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.CompareTo(right) >= 0;
+        }
     }
 }

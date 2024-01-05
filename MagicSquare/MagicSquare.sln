@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicSquare", "MagicSquare.csproj", "{1AA50FE1-0662-4265-A1EA-5347FEC40F4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicSquareTests", "..\MagicSquareTests\MagicSquareTests.csproj", "{513D1D11-69AB-46B3-B734-BC7AF19A533F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1AA50FE1-0662-4265-A1EA-5347FEC40F4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AA50FE1-0662-4265-A1EA-5347FEC40F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AA50FE1-0662-4265-A1EA-5347FEC40F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AA50FE1-0662-4265-A1EA-5347FEC40F4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{513D1D11-69AB-46B3-B734-BC7AF19A533F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{513D1D11-69AB-46B3-B734-BC7AF19A533F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{513D1D11-69AB-46B3-B734-BC7AF19A533F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{513D1D11-69AB-46B3-B734-BC7AF19A533F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {646DD9D7-3E4E-4C35-A817-709E484EAD8C}
+	EndGlobalSection
+EndGlobal
